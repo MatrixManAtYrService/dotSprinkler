@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+INSTALL_DIR="$CONFIG_DIR/install"
+if type "geeknote" &>/dev/null; then
+	echo ". geeknote already installed"
+else
+	if [[ $EUID -eq 0 ]]; then
+		mkdir -p "$INSTALL_DIR/temp/geeknote"
+		git clone git://github.com/VitaliyRodnenko/geeknote.git "$INSTALL_DIR/temp/geeknote"
+		cd "$INSTALL_DIR/temp/geeknote" && python setup.py install
+		echo ". installed geeknote, run \"geeknote login\" to authenticate."
+	else
+		echo "? rerun as root to install geeknote"
+	fi
+fi
