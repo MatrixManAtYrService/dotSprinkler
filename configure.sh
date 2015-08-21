@@ -3,16 +3,7 @@
 ## Dependencies
 declare -a requirements=("curl" "git")
 
-declare -A locations
-locations[_bash_profile]="$HOME/.bash_profile"
-locations[_bash_aliases]="$HOME/.bash_aliases"
-locations[_vimrc]="$HOME/.vimrc"
-locations[_i3_config]="$HOME/.i3/config"
-locations[_uncrustify_cfg]="$HOME/.uncrustify_cfg"
-locations[_gitconfig]="$HOME/.gitconfig"
-locations[_vim]="$HOME/.vim"
-
-declare -a installs=("geeknote.sh")
+declare -a install=("geeknote.sh")
 
 CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export CONFIG_DIR
@@ -27,6 +18,11 @@ else
 	echo ". Bash 4.0.0 or higher"
 fi
 
+# builds and exports CONFIG_LOCATIONS (requires Bash 4 or higher)
+declare -A CONFIG_LOCATIONS
+export CONFIG_LOCATIONS
+. $CONFIG_DIR/locations.sh
+
 ## Are this script's dependencies installed?
 for req in "${requirements[@]}" ; do
 	if ! type "$req" &>/dev/null
@@ -39,7 +35,7 @@ for req in "${requirements[@]}" ; do
 done
 
 ## Do the referenced dotfiles exist?
-for config in "${!locations[@]}"; do
+for config in "${!CONFIG_LOCATIONS[@]}"; do
     if [ -a $CONFIG_DIR/$config ]; then
         echo ". Found config: $CONFIG_DIR/$config"
     else
@@ -58,22 +54,23 @@ fi
 echo "Extending .bashrc to $CONFIG_DIR/_bashrc_extended."
 printf "\n%s\n%s\n" \
 "#Reference to external config file" \
-"(exec \"~/configs/_bashrc_continued\")" \
+". ~/configs/_bashrc_continued" \
 >> ~/.bashrc
 
+## DELETE THIS
+exit 2
+
 ## Create links to configured dotfiles
-for config in "${!locations[@]}"; do
-	location=${locations[$config]}
-    if [ -f ${locations[$config]} ]; then
-		if [ -L ${locations[$config]} ]; then
+for config in "${!CONFIG_LOCATIONS[@]}"; do
+	location=${CONFIG_LOCATIONS[$config]}
+    if [ -f ${CONFIG_LOCATIONS[$config]} ]; then
+		if [ -L ${CONFIG_LOCATIONS[$config]} ]; then
 			echo "? $location already exists, and is alrady a link. Doing nothing."
 			mklink=false;
 
 		else
-			echo "? $location already exists, and is not a link.  Moved original to $CONFIG_DIR"
-			echo "      Reconcile: $CONFIG_DIR/_$config (currently ignored)"
-			echo "      with: $CONFIG_DIR/$config (currently used)."
-			mv $location $CONFIG_DIR/_$config
+			mv -f  $location $location".bak"
+			echo "? $location already exists and is not a link.  Backed up original to "$location".bak"
 			mklink=true;
 		fi
 	else

@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
+
+EDITOR=vim
+VISUAL=$EDITOR
+export EDITOR VISUAL
+
 set -o vi
