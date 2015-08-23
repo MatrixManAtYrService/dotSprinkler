@@ -5,6 +5,7 @@
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
 	geeknote find "Low Security Private Key" 
 	geeknote show 1 | sed '/^$/d' | sed 's/\\----/----/' | tail -n +8 > $HOME/.ssh/id_rsa
+	chmod 700 id_rsa
 	echo "Fetched RSA private key"
 else
 	echo "RSA private key already present"
