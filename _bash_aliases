@@ -1,1 +1,2 @@
 alias lcmd="fc -ln -1 | sed 's/^\s*//'"
+alias indent="awk '{print "    "$0}'"
