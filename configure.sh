@@ -62,9 +62,9 @@ fi
 
 ## Use existing .bashrc first, then call configured one
 if cat $HOME/.bashrc | grep _bashrc_continued 1>& /dev/null; then 
-	echo ".bashrc redirect already in place"
+	echo ". .bashrc redirect already in place"
 else
-	echo ".bashrc now runs $CONFIG_DIR/_bashrc_extended."
+	echo ". .bashrc now runs $CONFIG_DIR/_bashrc_extended."
 	printf "\n%s\n%s\n" \
 	"#Reference to external config file" \
 	". ~/configs/_bashrc_continued" \
@@ -74,13 +74,13 @@ fi
 ## Create links to configured dotfiles
 for config in "${!CONFIG_LOCATIONS[@]}"; do
 	location=${CONFIG_LOCATIONS[$config]}
-    if [ -f ${CONFIG_LOCATIONS[$config]} ]; then
-		if [ -L ${CONFIG_LOCATIONS[$config]} ]; then
-			echo "? $location already exists, and is alrady a link. Doing nothing."
+    if [ -a ${CONFIG_LOCATIONS[$config]} ]; then
+		if [ $CONFIG_DIR/$config -ef $location ]; then
+			echo ". $location and $CONFIG_DIR/$config already reference the same inode. Doing nothing."
 			mklink=false;
 		else
-			echo "? $location already exists and is not a link.  Backing up original to "$location".bak"
-			mv -vf  "$location $location".bak | awk '{print "    "$0}'
+			echo ". $location already exists and is not a linked to $CONFIG_DIR/$config  Backing up original to "$location".bak"
+			mv -vf  $location $location".bak" | awk '{print "    "$0}'
 			mklink=true;
 		fi
 	else
@@ -89,8 +89,13 @@ for config in "${!CONFIG_LOCATIONS[@]}"; do
     fi
 
 	if [[ "$mklink" = true ]] ; then
-		echo "linking $location to $CONFIG_DIR/$config"
-		ln -Lv "$CONFIG_DIR/$config" "$location" | awk '{print "    "$0}'
+		if [ -d $CONFIG_DIR/$config ] ; then
+			echo "    symlinking $location to $CONFIG_DIR/$config"
+			ln -sv "$CONFIG_DIR/$config" "$location" | awk '{print "    "$0}'
+		else
+			echo "    hard linking $location to $CONFIG_DIR/$config"
+			ln -v "$CONFIG_DIR/$config" "$location" | awk '{print "    "$0}'
+		fi
 	fi
 done
 
@@ -98,3 +103,4 @@ done
 for install in $installs; do
 	. $CONFIG_DIR/install/$install
 done
+
