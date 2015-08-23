@@ -12,8 +12,14 @@ export CONFIG_LOCATIONS
 
 for location in "${!CONFIG_LOCATIONS[@]}"; do
 	if [ -a ${CONFIG_LOCATIONS[$location]}.bak ] ; then
-		echo ${CONFIG_LOCATIONS[$location]}".bak exists, restoring it"
-		mv -vf ${CONFIG_LOCATIONS[$location]}".bak" ${CONFIG_LOCATIONS[$location]} | awk '{print "    "$0}'
+		if [ -d ${CONFIG_LOCATIONS[$location]}.bak ] ; then
+			echo ${CONFIG_LOCATIONS[$location]}".bak/ exists, restoring it"
+			rm -rf ${CONFIG_LOCATIONS[$location]} | awk '{print "    "$0}'
+			mv -vf ${CONFIG_LOCATIONS[$location]}".bak" ${CONFIG_LOCATIONS[$location]} | awk '{print "    "$0}'
+		else
+			echo ${CONFIG_LOCATIONS[$location]}".bak exists, restoring it"
+			mv -vf ${CONFIG_LOCATIONS[$location]}".bak" ${CONFIG_LOCATIONS[$location]} | awk '{print "    "$0}'
+		fi
 	else
 		echo "${CONFIG_LOCATIONS[$location]}.bak does not exist, doing nothing"
 	fi

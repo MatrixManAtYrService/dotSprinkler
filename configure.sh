@@ -12,8 +12,6 @@
 ## Dependencies
 declare -a requirements=("curl" "git")
 
-declare -a installs=("geeknote.sh")
-
 CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export CONFIG_DIR
 
@@ -76,15 +74,19 @@ for config in "${!CONFIG_LOCATIONS[@]}"; do
 	location=${CONFIG_LOCATIONS[$config]}
     if [ -a ${CONFIG_LOCATIONS[$config]} ]; then
 		if [ $CONFIG_DIR/$config -ef $location ]; then
-			echo ". $location and $CONFIG_DIR/$config already reference the same inode. Doing nothing."
+			echo ". Already linked:"
+			echo "    $location <==> $CONFIG_DIR/$config"
 			mklink=false;
 		else
-			echo ". $location already exists and is not a linked to $CONFIG_DIR/$config  Backing up original to "$location".bak"
+			echo ". Not linked:"
+		   	echo "    $location <=!=> $CONFIG_DIR/$config"
+		    echo "    Backing up original to "$location".bak"
 			mv -vf  $location $location".bak" | awk '{print "    "$0}'
 			mklink=true;
 		fi
 	else
-		echo ". $location does not exist"
+		echo ". The following file does not exist"
+        echo "    $location"
 		mklink=true;
     fi
 
@@ -96,11 +98,9 @@ for config in "${!CONFIG_LOCATIONS[@]}"; do
 			echo "    hard linking $location to $CONFIG_DIR/$config"
 			ln -v "$CONFIG_DIR/$config" "$location" | awk '{print "    "$0}'
 		fi
+	else
+		echo "    Doing nothing."
 	fi
-done
-
-## Run install scripts
-for install in $installs; do
-	. $CONFIG_DIR/install/$install
+	echo
 done
 
