@@ -15,22 +15,20 @@ Installation
     # See "personalization" below
     dotSprinkler/bootstrap.sh
     
-
-
 Usage
 -----
 
-- **bootstrap.sh** is the "magic button" script that installs software and configures it (requires apt).  It runs configure.sh, prompts the user to authenticate with Evernote, and then runs personalize.sh.
+- **bootstrap.sh** is the "magic button" script that installs software and configures it (requires apt).  It runs configure.sh, scripts in the install/ directory, and then gives instructions on personalizing the install (authenticate with evernote and then run personalize.sh).
 
 - **configure.sh** assumes that all of the repository-based work has been done and sprinkles the dotfiles.  It also runs any install-scripts that aren't covered by apt's repositories (these are located in ./install/).
 
-- **clearExisting.sh** removes whatever lives at the target locations for the dotfiles.  If they're links, they're simple deleted.  If they're config files, they're backed up.
+- **clearTargets.sh** removes whatever lives at the target locations for the dotfiles.  If they're links, they're simply deleted.  If they're config files, they're backed up.  Used mostly for debugging.
 
-- **restoreBackups** restores backups made by clearExisting.sh
+- **unConfigure.sh** restores backups made by either configure.sh or clearExisting.sh.  Running this should return the system configuration to however it was before you dotSprinkled it.  It will not, however, uninstall software
 
 - **locations.sh** maps dotfiles to their various locations in the target system, it is called by several of the other scripts.
 
-- **personalize.sh** exists because I didn't want to put my SSH keys on github.  It fetches the more personal aspects of my configuration from Evernote (which may not be the best place for them, but we're talking low-security keys here) and puts them in place. [Coming Soon]
+- **personalize.sh** exists because I didn't want to put my SSH keys on github.  It fetches the more personal aspects of my configuration from Evernote (which may not be the best place for them, but we're talking low-security keys here) and puts them in place.
 
 Alternatives
 ------------
@@ -50,5 +48,5 @@ I'm going to try to move personal stuff to personalize.sh, but I'll probably get
 License
 -------
 
-This software is provided as is (aren't most things?).  The only "particular purpose" it is warrantied to be "fit" for is taking up space in memory somewhere.  You can do whatever you like with it, but if you redistribute it you should remove any references to the original author so that spooks from the future can't use them to track him down in the event that dotSprinkles grows up to become Skynet.  Also, please don't encourage its growing up to become Skynet.
+This software is provided as is (aren't most things?).  The only "particular purpose" it is warrantied to be "fit" for is taking up space in memory somewhere.  You can do whatever you like with it, but if you redistribute it you should remove any references to the original author so that spooks from the future can't use them to track him down in the event that dotSprinkler grows up to become Skynet.  Also, please don't encourage its growing up to become Skynet.
 
