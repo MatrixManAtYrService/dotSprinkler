@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 ## Contact evernote and fetch keys
+
+mkdir -vp $HOME/.ssh
+
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
 	geeknote find "Low Security Private Key" 
 	# Evernote escapes the -----'s and adds a newline, probably because it is interpreting them as markdown, stripping these out.
@@ -14,7 +17,7 @@ fi
 if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
 	geeknote find "Low Security Public Key"
 	# Evernote replaces mail@address.com with [mail@address.com](user@
-	geeknote show 1 | tail -n +9 | sed 's/\[[^]]*\](mailto:\([^)]*\))/\1/' > $HOME/.ssh/id_rsa.pub 
+	geeknote show 1 | tail -n +9 | sed 's/\[[^]]*\](mailto:\([^)]*\))/\1/' | sed '/^$/d' > $HOME/.ssh/id_rsa.pub 
 	echo "Fetched RSA public key"
 else
 	echo "RSA private key already present"
