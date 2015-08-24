@@ -65,7 +65,7 @@ else
 	echo ". .bashrc now runs $CONFIG_DIR/_bashrc_extended."
 	printf "\n%s\n%s\n" \
 	"#Reference to external config file" \
-	". ~/configs/_bashrc_continued" \
+	". $CONFIG_DIR/_bashrc_continued" \
 	>> ~/.bashrc
 fi
 
