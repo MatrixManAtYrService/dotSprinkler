@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+cd $CONFIG_DIR
+
+ if [[ $(git remote show origin) =~ "https" ]] ; then
+	 git remote rm origin
+	 git remote add origin git@github.com:MatrixManAtYrService/dotSprinkler.git
+ fi
+
+
 ## Contact evernote and fetch keys
 mkdir -vp -m 700 $HOME/.ssh
 
