@@ -11,7 +11,7 @@ Typically, dotSprinkler creates hard links between the packaged dotfiles (e.g. `
 Installation
 -----------
 
-    git clone git@github.com:MatrixManAtYrService/dotSprinkler.git
+    git clone https://github.com/MatrixManAtYrService/dotSprinkler/
     # See "personalization" below
     dotSprinkler/bootstrap.sh
     

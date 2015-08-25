@@ -18,7 +18,7 @@ apt-get install $installFromRepo
 for install in $installScripts; do
 	. $CONFIG_DIR/install/$install
 done
-./configure.sh
+. $CONFIG_DIR/configure.sh
 
 source $HOME/.bashrc
 
