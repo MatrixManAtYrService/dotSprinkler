@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-mkdir -p -m 700 $HOME/.ssh
-
 ## Contact evernote and fetch keys
-
-mkdir -vp $HOME/.ssh
+mkdir -vp -m 700 $HOME/.ssh
 
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
 	geeknote find "Blue Key (private)"
