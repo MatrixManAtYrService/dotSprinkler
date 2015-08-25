@@ -8,6 +8,7 @@ declare -a installScripts=("geeknote.sh")
 CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export CONFIG_DIR
 
+cd $CONFIG_DIR
 ## Clone Submodules
 git submodule update --init --recursive
 
