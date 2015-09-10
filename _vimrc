@@ -2,6 +2,9 @@ execute pathogen#infect()
 syntax on
 
 set background=dark
+
+"this may need to be changed (1 or 0) depending on the terminal emulator in use
+let g:solarized_termtrans = 1
 colorscheme solarized
 
 filetype plugin indent on

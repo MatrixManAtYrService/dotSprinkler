@@ -5,6 +5,7 @@ if type "geeknote" &>/dev/null; then
 	echo ". geeknote already installed"
 else
 	if [[ $EUID -eq 0 ]]; then
+		pip install setuptools
 		cd "$INSTALL_DIR/geeknote" && python setup.py install
 		echo ". installed geeknote, run \"geeknote login\" to authenticate."
 	else
