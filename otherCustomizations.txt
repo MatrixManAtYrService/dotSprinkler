@@ -1,0 +1,9 @@
+
+Create a "light" and "dark" profile for gnome-terminal, then use this script to color them to match solarized:
+https://gist.github.com/gmodarelli/5942850
+
+Make CAPS an additional CTRL:
+http://askubuntu.com/questions/149971/how-do-you-remap-a-key-to-the-caps-lock-key-in-xubuntu
+
+Swap Tilde and Escape:
+http://askubuntu.com/questions/325272/permanent-xmodmap-in-ubuntu-13-04/347382
