@@ -1,0 +1,1 @@
+screen.vmb: call delete('/home/mrixman/.vim/autoload/screen.vim')|call delete('/home/mrixman/.vim/doc/screen.txt')|call delete('/home/mrixman/.vim/plugin/screen.vim')
