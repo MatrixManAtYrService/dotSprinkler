@@ -1,7 +1,10 @@
 execute pathogen#infect()
 syntax on
 
-set background=dark
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+	autocmd GUIEnter * set visualbell t_vb=
+endif
 
 "this may need to be changed (1 or 0) depending on the terminal emulator in use
 let g:solarized_termtrans = 1
@@ -19,12 +22,12 @@ set splitbelow
 set splitright
 
 "Nerd-tree
-"
+
 let mapleader=","
 nmap <leader>n :NERDTreeFind<cr>
 
 " Screen (vim + gnu screen)
-"
+
 "let g:ScreenImpl = 'Tmux'
 
 function! GoScreenShell()
