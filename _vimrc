@@ -31,10 +31,12 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-"Nerd-tree
-
 let mapleader=","
+
+" Nerd-tree
 nmap <leader>n :NERDTreeFind<cr>
+let g:NERDTreeMapOpenSplit='s'
+let g:NERDTreeMapOpenVSplit='v'
 
 " Screen (vim + gnu screen)
 
