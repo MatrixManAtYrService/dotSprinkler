@@ -13,7 +13,7 @@ cd $CONFIG_DIR
 git submodule update --init --recursive
 
 ## Install stuff
-apt-cyg install $installFromRepo
+apt-get install $installFromRepo
 
 ## Run install scripts
 for install in $installScripts; do
