@@ -53,3 +53,6 @@ if [ ! -f "$HOME/.ssh/config" ]; then
 else
 	echo "SSH Config already present"
 fi
+
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
