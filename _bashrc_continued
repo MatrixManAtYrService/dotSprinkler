@@ -5,3 +5,12 @@ VISUAL=$EDITOR
 export EDITOR VISUAL
 
 set -o vi
+
+if [[ "$(uname -o)" -eq "Cygwin" ]] ; then
+   source $HOME/dotSprinkler/mintty-colors-solarized/sol.dark
+fi
+eval `dircolors $HOME/.dircolors`
+
+if [ -f "${HOME}/.bash_aliases" ]; then
+  source "${HOME}/.bash_aliases"
+fi

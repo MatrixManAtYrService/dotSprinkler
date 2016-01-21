@@ -1,1 +1,3 @@
 alias lcmd="fc -ln -1 | sed 's/^\s*//'"
+alias ls='ls --color'
+alias vi='vim'
