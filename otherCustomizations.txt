@@ -5,4 +5,8 @@ https://gist.github.com/gmodarelli/5942850
 Make CAPS an additional CTRL:
 http://askubuntu.com/questions/149971/how-do-you-remap-a-key-to-the-caps-lock-key-in-xubuntu
 
+Apt-Cyg setup first launch the cygwin installer like so:
 setup.exe -q -P  wget,tar,qawk,bzip2,subversion,vim
+https://github.com/transcode-open/apt-cyg
+
+http://ubuntuforums.org/showthread.php?t=2211863
