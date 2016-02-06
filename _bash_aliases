@@ -1,3 +1,4 @@
 alias lcmd="fc -ln -1 | sed 's/^\s*//'"
-alias ls='ls --color'
+alias ls='ls --color=auto'
 alias vi='vim'
+alias stripcolors='sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g"'
