@@ -7,8 +7,12 @@ execute pathogen#infect()
 syntax on
 
 set bg=dark
-set cursorline cursorcolumn
 set colorcolumn=120
+
+" illuminate cursor crosshairs in the current buffer only
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
 
 " Don't beep
 set noerrorbells visualbell t_vb=
