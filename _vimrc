@@ -17,7 +17,7 @@ set cursorline cursorcolumn
 " Don't beep
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-	autocmd GUIEnter * set visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
 endif
 
 " this may need to be changed (1 or 0) depending on the terminal emulator in use
@@ -50,6 +50,15 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
+" Highlight extra whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+
 let mapleader=","
 
 " Nerd-tree
@@ -57,27 +66,66 @@ nmap <leader>n :NERDTreeFind<cr>
 let g:NERDTreeMapOpenSplit='s'
 let g:NERDTreeMapOpenVSplit='v'
 
+" Airline
+" =======
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+set laststatus=2
+let &t_Co=256
+
+" Ctrl-p
+" ======
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" Use the nearest .git directory as the cwd
+let g:ctrlp_working_path_mode = 'r'
+
+ " Find in cwd
+nmap <leader>ff :CtrlP<cr>
+ " Find in open buffers
+nmap <leader>fb :CtrlPBuffer<cr>
+ " Find among recently used buffers
+nmap <leader>fr :CtrlPMRU<cr>
+ " Mix of above
+nmap <leader>fm :CtrlPMixed<cr>
+
+" Buffgator
+" =========
+
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+" Looper buffers
+let g:buffergator_mru_cycle_loop = 1
+" Go to the previous buffer open
+nmap <leader>j :BuffergatorMruCyclePrev<cr>
+" Go to the next buffer open
+nmap <leader>k :BuffergatorMruCycleNext<cr>
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
+" Shared bindings from Solution #1 from earlier
+nmap <leader>T :enew<cr>
+nmap <leader>bq :bp <BAR> bd #<cr>
+
 " Screen (vim + gnu screen)
-
-"let g:ScreenImpl = 'Tmux'
-
 function! GoScreenShell()
-	if g:ScreenShellActive
-		let line=getline('.')
-		:call g:ScreenShellSend(line)
-	else
-		:ScreenShell
-	endif
+    if g:ScreenShellActive
+        let line=getline('.')
+        :call g:ScreenShellSend(line)
+    else
+        :ScreenShell
+    endif
 endfunction
 
 command! -nargs=+ -complete=file ScreenShellCmd call g:ScreenShellSend("<args>")
 nmap <leader>sc :ScreenShellCmd<space>
 
 nmap <leader>ss :call GoScreenShell()<cr>
-nmap <leader>sv :ScreenShell!<cr>
 vmap <leader>ss :ScreenSend<cr>
 nmap <leader>sq :ScreenQuit<cr>
 map <leader>s<tab> :call g:ScreenShellFocus()<cr>
-
-" TODO: make apply this under ftplugin
-nmap <leader>k :call Uncrustify('cpp')<cr>

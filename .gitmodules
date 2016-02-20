@@ -7,3 +7,15 @@
 [submodule "_vim/bundle/vim-colors-solarized"]
 	path = _vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "_vim/bundle/vim-airline"]
+	path = _vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "_vim/bundle/ctrlp.vim"]
+	path = _vim/bundle/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
+[submodule "_vim/bundle/vim-airline-themes"]
+	path = _vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "_vim/bundle/vim-buffergator"]
+	path = _vim/bundle/vim-buffergator
+	url = https://github.com/jeetsukumaran/vim-buffergator.git
