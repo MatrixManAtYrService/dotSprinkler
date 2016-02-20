@@ -63,8 +63,9 @@ let mapleader=","
 
 " Nerd-tree
 nmap <leader>n :NERDTreeFind<cr>
-let g:NERDTreeMapOpenSplit='s'
-let g:NERDTreeMapOpenVSplit='v'
+
+" update CWD based on NERDTree root
+let g:NERDTreeChDirMode       = 2
 
 " Airline
 " =======
@@ -81,8 +82,11 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
 
-" Use the nearest .git directory as the cwd
-let g:ctrlp_working_path_mode = 'r'
+" Use the nearest .git directory relative to file
+"let g:ctrlp_working_path_mode = 'r'
+
+" Use the nearest .git directory relative to CWD
+let g:ctrlp_working_path_mode = 'rw'
 
  " Find in cwd
 nmap <leader>ff :CtrlP<cr>
