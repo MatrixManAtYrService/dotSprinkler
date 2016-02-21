@@ -26,7 +26,7 @@ else
     apt-cyg install $installFromRepo
 
     ## Run install scripts
-    for install in $installScripts; do
+    for install in ${installScripts[@]}; do
         . $CONFIG_DIR/install/$install
     done
     . $CONFIG_DIR/configure.sh

@@ -116,7 +116,12 @@ nmap <leader>bl :BuffergatorOpen<cr>
 nmap <leader>T :enew<cr>
 nmap <leader>bq :bp <BAR> bd #<cr>
 
+" Conque Terminal
+nmap <leader>cb :ConqueTerm bash
+
 " Screen (vim + gnu screen)
+" =========================
+
 function! GoScreenShell()
     if g:ScreenShellActive
         let line=getline('.')
