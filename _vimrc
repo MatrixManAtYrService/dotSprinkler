@@ -9,7 +9,7 @@ syntax on
 set bg=dark
 set colorcolumn=120
 
-" illuminate cursor crosshairs in the current buffer only
+" Illuminate cursor crosshairs in the current buffer only
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
@@ -58,8 +58,9 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-
 let mapleader=","
+nmap <leader>qq :q<cr>
+nmap <leader>qw :wq<cr>
 
 " Nerd-tree
 nmap <leader>n :NERDTreeFind<cr>
@@ -117,7 +118,7 @@ nmap <leader>T :enew<cr>
 nmap <leader>bq :bp <BAR> bd #<cr>
 
 " Conque Terminal
-nmap <leader>cb :ConqueTerm bash
+nmap <leader>cb :ConqueTerm bash<cr>
 
 " Screen (vim + gnu screen)
 " =========================
