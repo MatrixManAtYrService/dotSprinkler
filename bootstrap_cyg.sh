@@ -11,7 +11,7 @@ then
 else
     echo ". Found apt-cyg"
     installFromRepo="curl git vim tree python python-pip screen"
-    declare -a installScripts=("geeknote.sh")
+    declare -a installScripts=("geeknote.sh" "githooks.sh")
     easy_install-2.7 pip
 
 
