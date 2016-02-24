@@ -3,7 +3,7 @@
 ## This script implements the customizations included in dotSprinkler
 
 installFromRepo="curl git vim tree python python-pip screen"
-declare -a installScripts=("geeknote.sh" "githooks.sh conqueShell.sh")
+declare -a installScripts=("geeknote.sh" "githooks.sh")
 
 CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export CONFIG_DIR

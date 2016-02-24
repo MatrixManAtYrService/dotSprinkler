@@ -50,6 +50,9 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
+" Allow buffer switch away from unsaved
+set hidden
+
 " Highlight extra whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -75,7 +78,6 @@ let g:airline#extensions#tabline#buffer_min_count = 2
 set laststatus=2
 let &t_Co=256
 
-" Ctrl-p
 " ======
 " Setup some default ignores
 let g:ctrlp_custom_ignore = {
@@ -90,13 +92,15 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'rw'
 
  " Find in cwd
-nmap <leader>ff :CtrlP<cr>
+nmap <leader>fd :CtrlPMixed<cr>
  " Find in open buffers
 nmap <leader>fb :CtrlPBuffer<cr>
- " Find among recently used buffers
+ " Find among recently used
 nmap <leader>fr :CtrlPMRU<cr>
  " Mix of above
-nmap <leader>fm :CtrlPMixed<cr>
+nmap <leader>ff :CtrlP<cr>
+
+let g:ctrlp_regexp = 1
 
 " Buffgator
 " =========
@@ -107,15 +111,33 @@ let g:buffergator_viewport_split_policy = 'R'
 let g:buffergator_suppress_keymaps = 1
 " Looper buffers
 let g:buffergator_mru_cycle_loop = 1
+
+nmap <leader>b :BuffergatorOpen<cr>
+nmap <leader>T :enew<cr>
+
+
+
+" Tab/Buffer navigation
+" =====================
+nmap <leader>h :tabp<cr>
 " Go to the previous buffer open
 nmap <leader>j :BuffergatorMruCyclePrev<cr>
 " Go to the next buffer open
 nmap <leader>k :BuffergatorMruCycleNext<cr>
 " View the entire list of buffers open
-nmap <leader>bl :BuffergatorOpen<cr>
-" Shared bindings from Solution #1 from earlier
-nmap <leader>T :enew<cr>
-nmap <leader>bq :bp <BAR> bd #<cr>
+nmap <leader>l :tabn<cr>
+
+" quit buffer
+nmap <leader>qb :bp <BAR> bd #<cr>
+
+" quit tab (does not close buffers)
+nmap <leader>qt :tabclose<cr>
+
+" quit other tabs (does not close buffers)
+nmap <leader>qot :tabclose<cr>
+
+" quit window (does not close buffer)
+nmap <leader>qw :close<cr>
 
 " Conque Terminal
 nmap <leader>cb :ConqueTerm bash<cr>
