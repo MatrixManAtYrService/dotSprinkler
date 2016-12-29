@@ -1,0 +1,13 @@
+# Source Prezto.
+
+PS1=$'%{\e]0;%d\a%}\n%F{green}%n@%m %F{yellow}%d%f\n%# '
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# vim bindings
+bindkey -v 
+
+# aliases from bash
+source ~/.bash_profile
