@@ -10,4 +10,5 @@ fi
 bindkey -v 
 
 # aliases from bash
-source ~/.bash_profile
+source ~/.bash_aliases
+eval `dircolors ~/dotSprinkler/dircolors-solarized/dircolors.256dark`
