@@ -1,3 +1,5 @@
+Note: this repo is no longer maintained.  I now use https://github.com/MatrixManAtYrService/home which is simpler.  Turns out git pretty much handles everything.
+
 dotSprinkler
 ===============
 
